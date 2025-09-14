@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Subdomain Takeover — Proof</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --fg: #e2e8f0;
+        --muted: #94a3b8;
+        --accent: #22d3ee;
+        --card: #111827;
+        --ok: #34d399;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 800px at 50% -200px, #1f2937 0%, var(--bg) 60%);
+        color: var(--fg);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .card {
+        width: 100%;
+        max-width: 720px;
+        background: linear-gradient(180deg, rgba(34,211,238,0.06), rgba(34,211,238,0.02));
+        border: 1px solid rgba(226,232,240,0.08);
+        border-radius: 18px;
+        padding: 28px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: clamp(28px, 4vw, 40px);
+        letter-spacing: 0.3px;
+      }
+      .tag {
+        display: inline-block;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(34,211,238,0.15);
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+      }
+      p { line-height: 1.6; color: var(--fg); }
+      .muted { color: var(--muted); }
+      code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .row { display:flex; gap:12px; align-items:center; flex-wrap: wrap; }
+      .divider { height:1px; background: rgba(226,232,240,0.08); margin: 16px 0; border:0; }
+      .ok { color: var(--ok); font-weight:600; }
+      .box {
+        background: rgba(15,23,42,0.6);
+        border: 1px dashed rgba(226,232,240,0.18);
+        border-radius: 12px;
+        padding: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card" role="main" aria-labelledby="title">
+      <div class="row" style="justify-content: space-between">
+        <span class="tag">Security Notice</span>
+        <span class="muted mono" id="timestamp" aria-live="polite"></span>
+      </div>
+
+      <h1 id="title">Subdomain Takeover — Proof</h1>
+      <p>
+        This subdomain is under the control of security researcher .
+      </p>
+      <p class="muted">
+        No data has been accessed or modified. This page exists solely to demonstrate
+        control of DNS/hosting for responsible disclosure.
+      </p>
+
+      <hr class="divider" />
+
+      <div class="box">
+        <p class="mono" id="target">Target: <strong><span id="host">web-sandbox.oaiusercontent.com</span></strong></p>
+        <p>Status: <span class="ok">Verified takeover</span></p>
+      </div>
+
+      <p class="muted" style="margin-top:12px">
+        Please contact your security team to reclaim this subdomain and remove unused DNS records.
+      </p>
+    </main>
+
+    <script>
+      // Show a simple timestamp
+      (function () {
+        var el = document.getElementById('timestamp');
+        var d = new Date();
+        el.textContent = d.toUTCString();
+        // Try to auto-detect current host
+        var hostEl = document.getElementById('host');
+        if (hostEl && location && location.host) {
+          hostEl.textContent = location.host;
+        }
+      })();
+    </script>
+  </body>
+</html>
